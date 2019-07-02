@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require('./config.json')
+const { discordBotToken, eBayAppID } = require('./config.json')
 const ebayCommand = require('./commands').ebayCommand
 const completedListingsRequest = require('./eBayApi/findingReq').completedListingsRequest
 const getSold = require('./eBayApi/utils/parsing').getSold
@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', (msg) => {
     if(msg.content.startsWith(ebayCommand)) {
         let keyword = msg.content.slice(ebayCommand.length);
-        completedListingsRequest(config.eBayAppID, keyword)
+        completedListingsRequest(eBayAppID, keyword)
         .then((data) => {
             const statusRes = data.findCompletedItemsResponse[0].ack[0];
             const listingQty = data.findCompletedItemsResponse[0].searchResult[0]['@count'];
@@ -43,7 +43,7 @@ client.on('message', (msg) => {
     }
 });
 
-client.login(config.discordBotToken)
+client.login(discordBotToken)
 .catch((error) => {
     console.log(
         `${error}  Please check the discordBotToken key in the config file and try again.`

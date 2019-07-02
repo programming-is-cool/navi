@@ -1,7 +1,5 @@
-const config = require('./config.json')
-
-const ebayCommand = `${ config.prefix }ebay `;
+const { prefix } = require('./config.json')
 
 module.exports = {
-    ebayCommand: ebayCommand,
+    ebayCommand: `${ prefix }ebay `,
 }
