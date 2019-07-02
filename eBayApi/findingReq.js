@@ -1,8 +1,10 @@
 const https = require('https');
 
-function completedListingsRequest (appID, keywords) {
+function completedListingsRequest (appID, keywordArray) {
+    // appID:  String
+    // keywords: Array.  Each word should be a separate element in the array.
 
-    var keywords = keywords.replace(/\s+/g, '%20');
+    let keywords = keywordArray.join('%20');
 
     let baseUrl = 'https://svcs.ebay.com/services/search/FindingService/v1?'
         baseUrl += 'OPERATION-NAME=findCompletedItems&'
